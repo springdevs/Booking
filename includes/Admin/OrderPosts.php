@@ -1,8 +1,6 @@
 <?php
 
-
 namespace SpringDevs\WcBooking\Admin;
-
 
 /**
  * Class OrderStatus
@@ -61,52 +59,52 @@ class OrderPosts
 
     public function bookable_order_save_post()
     {
-?>
+        ?>
         <div class="submitbox">
             <div id="delete-action">
-                <a class="submitdelete deletion" href="<?php echo get_delete_post_link(); ?>">Move to trash</a>
+                <a class="submitdelete deletion" href="<?php echo get_delete_post_link(); ?>"><?php _e('Move to trash', 'sdevs_wea');?></a>
             </div>
             <input type="submit" class="button save_order button-primary tips" name="save" value="Save Booking">
         </div>
     <?php
-    }
+}
 
     public function bookable_order_customer_data()
     {
         $post_meta = get_post_meta(get_the_ID(), "_booking_order_meta", true);
-        $order = wc_get_order($post_meta["order_id"]);
-    ?>
+        $order     = wc_get_order($post_meta["order_id"]);
+        ?>
         <table class="booking-customer-details" style="width: 100%;">
             <tbody>
                 <tr>
-                    <th>Name:</th>
+                    <th><?php _e('Name', 'sdevs_wea');?>:</th>
                     <td><?php echo $order->get_formatted_billing_full_name(); ?></td>
                 </tr>
                 <tr>
-                    <th>Email:</th>
+                    <th><?php _e('Email', 'sdevs_wea');?>:</th>
                     <td><a href="mailto:<?php echo $order->get_billing_email(); ?>"><?php echo $order->get_billing_email(); ?></a></td>
                 </tr>
                 <tr>
-                    <th>Address:</th>
+                    <th><?php _e('Address', 'sdevs_wea');?>:</th>
                     <td><?php echo $order->get_formatted_billing_address(); ?></td>
                 </tr>
                 <tr>
-                    <th>Phone:</th>
+                    <th><?php _e('Phone', 'sdevs_wea');?>:</th>
                     <td><?php echo $order->get_billing_phone(); ?></td>
                 </tr>
                 <tr class="view">
                     <th>&nbsp;</th>
-                    <td><a class="button button-small" target="_blank" href="<?php echo get_edit_post_link($post_meta['order_id']); ?>">View Order</a></td>
+                    <td><a class="button button-small" target="_blank" href="<?php echo get_edit_post_link($post_meta['order_id']); ?>"><?php _e('View Order', 'sdevs_wea');?></a></td>
                 </tr>
             </tbody>
         </table>
         <?php
-    }
+}
 
     public function some_styles()
     {
         global $post;
-        if ($post->post_type == "bookable_order") :
+        if ($post->post_type == "bookable_order"):
         ?>
             <style>
                 .submitbox {
@@ -124,13 +122,13 @@ class OrderPosts
                 }
             </style>
         <?php
-        endif;
+endif;
     }
 
     public function some_scripts()
     {
         global $post;
-        if ($post->post_type == "bookable_order") :
+        if ($post->post_type == "bookable_order"):
         ?>
             <script>
                 jQuery(document).ready(function() {
@@ -138,35 +136,38 @@ class OrderPosts
                 });
             </script>
         <?php
-        endif;
+endif;
     }
 
     public function bookable_order_meta_fields()
     {
         global $post;
         $statuses = [
-            "paid" => "Paid",
-            "unpaid" => "Unpaid",
+            "paid"         => "Paid",
+            "unpaid"       => "Unpaid",
             "pending_conf" => "Pending Confirmation",
-            "confirmed" => "Confirmed",
-            "complete" => "Complete",
-            "cancelled" => "Cancelled",
+            "confirmed"    => "Confirmed",
+            "complete"     => "Complete",
+            "cancelled"    => "Cancelled",
         ];
-        $post_meta = get_post_meta($post->ID, "_booking_order_meta", true);
-        $product = wc_get_product($post_meta["product_id"]);
+        $post_meta  = get_post_meta($post->ID, "_booking_order_meta", true);
+        $product    = wc_get_product($post_meta["product_id"]);
         $attributes = [];
 
         if (empty($post_meta)) {
             $date = null;
             $time = null;
         } else {
-            $date = $post_meta["date"];
-            $time = strtotime($post_meta["time"]);
-            $time = date("H:i", $time);
+            $date  = $post_meta["date"];
+            $time  = strtotime($post_meta["time"]);
+            $time  = date("H:i", $time);
             $order = wc_get_order($post_meta["order_id"]);
             foreach ($order->get_items() as $key => $item) {
                 foreach ($item->get_meta_data() as $data) {
-                    if ($data->key != "Date" && $data->key != "Time") $attributes[$data->key] = $data->value;
+                    if ($data->key != "Date" && $data->key != "Time") {
+                        $attributes[$data->key] = $data->value;
+                    }
+
                 }
             }
         }
@@ -177,13 +178,13 @@ class OrderPosts
                     <th class="sdevs_th" scope="row"><label for="bookable_order_date">Product</label></th>
                     <td>
                         <p class="description" id="tagline-description">
-                            <a href="<?php the_permalink($post_meta["product_id"]); ?>" target="_blank">
+                            <a href="<?php the_permalink($post_meta["product_id"]);?>" target="_blank">
                                 <?php echo $product->get_title(); ?>
                             </a>
                             <br />
-                            <?php foreach ($attributes as $key => $value) : ?>
+                            <?php foreach ($attributes as $key => $value): ?>
                                 <strong><?php echo $key; ?> : </strong> <?php echo $value; ?><br />
-                            <?php endforeach; ?>
+                            <?php endforeach;?>
                         </p>
                     </td>
                 </tr>
@@ -201,30 +202,41 @@ class OrderPosts
                     <th class="sdevs_th" scope="row"><label for="bookable_order_status">Status</label></th>
                     <td>
                         <select name="bookable_order_status" id="bookable_order_status">
-                            <?php foreach ($statuses as $value => $label) : ?>
-                                <option value="<?php echo $value; ?>" <?php if ($post->post_status == $value) echo "selected"; ?>><?php echo $label; ?></option>
-                            <?php endforeach; ?>
+                            <?php foreach ($statuses as $value => $label): ?>
+                                <option value="<?php echo $value; ?>" <?php if ($post->post_status == $value) {
+            echo "selected";
+        }
+        ?>><?php echo $label; ?></option>
+                            <?php endforeach;?>
                         </select>
                     </td>
                 </tr>
             </tbody>
         </table>
 <?php
-    }
+}
 
     public function save_bookable_order_post($post_id)
     {
-        if (wp_is_post_revision($post_id)) return;
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-        if (!isset($_POST["bookable_order_date"])) return;
+        if (wp_is_post_revision($post_id)) {
+            return;
+        }
+
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        if (!isset($_POST["bookable_order_date"])) {
+            return;
+        }
 
         remove_action("save_post", [$this, "save_bookable_order_post"], 25);
 
-        $date = sanitize_text_field($_POST["bookable_order_date"]);
-        $time = sanitize_text_field($_POST["bookable_order_time"]);
-        $time = date("h:i a", strtotime($time));
-        $status = sanitize_text_field($_POST["bookable_order_status"]);
-        $post_meta = get_post_meta($post_id, "_booking_order_meta", true);
+        $date              = sanitize_text_field($_POST["bookable_order_date"]);
+        $time              = sanitize_text_field($_POST["bookable_order_time"]);
+        $time              = date("h:i a", strtotime($time));
+        $status            = sanitize_text_field($_POST["bookable_order_status"]);
+        $post_meta         = get_post_meta($post_id, "_booking_order_meta", true);
         $post_meta["date"] = $date;
         $post_meta["time"] = $time;
         update_post_meta($post_id, "_booking_order_meta", $post_meta);

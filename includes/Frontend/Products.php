@@ -10,6 +10,8 @@ class Products
 {
     public function __construct()
     {
+        add_filter('woocommerce_is_purchasable', [$this, "check_if_purchasable"], 10, 2);
+        add_action('woocommerce_single_product_summary', [$this, "text_if_active"]);
         add_filter('woocommerce_loop_add_to_cart_link', [$this, 'change_button'], 10, 2);
         add_filter('woocommerce_is_sold_individually', [$this, 'remove_quantity_field'], 10, 2);
         add_action('woocommerce_before_add_to_cart_button', [$this, 'date_time_placed_html']);
@@ -19,6 +21,52 @@ class Products
         add_filter('woocommerce_get_item_data', [$this, 'display_on_cart_item'], 10, 2);
         add_action('woocommerce_checkout_create_order_line_item', [$this, 'save_order_item_product_meta'], 10, 4);
         add_action('woocommerce_thankyou', [$this, 'change_order_status'], 10, 1);
+    }
+
+    public function check_if_purchasable($is_purchasable, $product)
+    {
+        $status = $this->check_product_in_request($product->get_id());
+        if ($status) return false;
+        return $is_purchasable;
+    }
+
+    public function text_if_active()
+    {
+        global $product;
+        if ($product->is_type('variable')) return;
+        $status = $this->check_product_in_request($product->get_id());
+        if ($status) {
+            _e('<strong>You already request this product !!</strong>', 'sdevs_wea');
+        }
+    }
+
+    public function check_product_in_request($product_id)
+    {
+        $status = false;
+        $book_meta = get_post_meta($product_id, "bookable_product_meta", true);
+        if (!empty($book_meta) && $book_meta["enable_booking"]) {
+            $customer_orders = get_posts(array(
+                'numberposts' => -1,
+                'meta_key' => '_customer_user',
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'meta_value' => get_current_user_id(),
+                'post_type' => wc_get_order_types(),
+                'post_status' => array_keys(wc_get_order_statuses()), 'post_status' => array('wc-reconf'),
+            ));
+            foreach ($customer_orders as $customer_order) {
+                $order = wc_get_order($customer_order->ID);
+                foreach ($order->get_items() as $order_item) {
+                    if ($order_item['product_id'] == $product_id) {
+                        $status = true;
+                    }
+                }
+                if ($status) {
+                    break;
+                }
+            }
+        }
+        return $status;
     }
 
     public function change_button($button, $product)

@@ -170,6 +170,7 @@ class Products
             $post_meta = get_post_meta($_product->get_id(), "bookable_product_meta", true);
             if (!empty($post_meta) && $post_meta["enable_booking"] && $post_meta["bookable_require_conf"]) :
                 $cartProductStatus = false;
+                $error_notice = __("Currently You have Confirmation product in a cart !!", "sdevs_wea");
                 if (!empty($current_product_meta) && $current_product_meta["enable_booking"]) :
                     if ($current_product_meta["bookable_require_conf"]) :
                         $cartProductStatus = true;
@@ -177,13 +178,14 @@ class Products
                 endif;
             else :
                 if (!empty($current_product_meta) && $current_product_meta["enable_booking"] && $current_product_meta["bookable_require_conf"]) :
+                    $error_notice = __("Currently You have Non-Confirmation product in a cart !!", "sdevs_wea");
                     $cartProductStatus = false;
                 endif;
             endif;
         }
 
         if (!$cartProductStatus) {
-            wc_add_notice(__("Currently You have Confirmation product in a cart.", "sdevs_wea"), 'error');
+            wc_add_notice($error_notice, 'error');
         }
         return $cartProductStatus;
     }

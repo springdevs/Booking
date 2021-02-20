@@ -59,52 +59,52 @@ class OrderPosts
 
     public function bookable_order_save_post()
     {
-        ?>
+?>
         <div class="submitbox">
             <div id="delete-action">
-                <a class="submitdelete deletion" href="<?php echo get_delete_post_link(); ?>"><?php _e('Move to trash', 'sdevs_wea');?></a>
+                <a class="submitdelete deletion" href="<?php echo get_delete_post_link(); ?>"><?php _e('Move to trash', 'sdevs_wea'); ?></a>
             </div>
             <input type="submit" class="button save_order button-primary tips" name="save" value="Save Booking">
         </div>
     <?php
-}
+    }
 
     public function bookable_order_customer_data()
     {
         $post_meta = get_post_meta(get_the_ID(), "_booking_order_meta", true);
         $order     = wc_get_order($post_meta["order_id"]);
-        ?>
+    ?>
         <table class="booking-customer-details" style="width: 100%;">
             <tbody>
                 <tr>
-                    <th><?php _e('Name', 'sdevs_wea');?>:</th>
+                    <th><?php _e('Name', 'sdevs_wea'); ?>:</th>
                     <td><?php echo $order->get_formatted_billing_full_name(); ?></td>
                 </tr>
                 <tr>
-                    <th><?php _e('Email', 'sdevs_wea');?>:</th>
+                    <th><?php _e('Email', 'sdevs_wea'); ?>:</th>
                     <td><a href="mailto:<?php echo $order->get_billing_email(); ?>"><?php echo $order->get_billing_email(); ?></a></td>
                 </tr>
                 <tr>
-                    <th><?php _e('Address', 'sdevs_wea');?>:</th>
+                    <th><?php _e('Address', 'sdevs_wea'); ?>:</th>
                     <td><?php echo $order->get_formatted_billing_address(); ?></td>
                 </tr>
                 <tr>
-                    <th><?php _e('Phone', 'sdevs_wea');?>:</th>
+                    <th><?php _e('Phone', 'sdevs_wea'); ?>:</th>
                     <td><?php echo $order->get_billing_phone(); ?></td>
                 </tr>
                 <tr class="view">
                     <th>&nbsp;</th>
-                    <td><a class="button button-small" target="_blank" href="<?php echo get_edit_post_link($post_meta['order_id']); ?>"><?php _e('View Order', 'sdevs_wea');?></a></td>
+                    <td><a class="button button-small" target="_blank" href="<?php echo get_edit_post_link($post_meta['order_id']); ?>"><?php _e('View Order', 'sdevs_wea'); ?></a></td>
                 </tr>
             </tbody>
         </table>
         <?php
-}
+    }
 
     public function some_styles()
     {
         global $post;
-        if ($post->post_type == "bookable_order"):
+        if ($post->post_type == "bookable_order") :
         ?>
             <style>
                 .submitbox {
@@ -122,13 +122,13 @@ class OrderPosts
                 }
             </style>
         <?php
-endif;
+        endif;
     }
 
     public function some_scripts()
     {
         global $post;
-        if ($post->post_type == "bookable_order"):
+        if ($post->post_type == "bookable_order") :
         ?>
             <script>
                 jQuery(document).ready(function() {
@@ -136,7 +136,7 @@ endif;
                 });
             </script>
         <?php
-endif;
+        endif;
     }
 
     public function bookable_order_meta_fields()
@@ -146,7 +146,7 @@ endif;
             "paid"         => "Paid",
             "unpaid"       => "Unpaid",
             "pending_conf" => "Pending Confirmation",
-            "confirmed"    => "Confirmed",
+            "confirmed"    => "Request Confirmed",
             "complete"     => "Complete",
             "cancelled"    => "Cancelled",
         ];
@@ -167,7 +167,6 @@ endif;
                     if ($data->key != "Date" && $data->key != "Time") {
                         $attributes[$data->key] = $data->value;
                     }
-
                 }
             }
         }
@@ -178,13 +177,13 @@ endif;
                     <th class="sdevs_th" scope="row"><label for="bookable_order_date">Product</label></th>
                     <td>
                         <p class="description" id="tagline-description">
-                            <a href="<?php the_permalink($post_meta["product_id"]);?>" target="_blank">
+                            <a href="<?php the_permalink($post_meta["product_id"]); ?>" target="_blank">
                                 <?php echo $product->get_title(); ?>
                             </a>
                             <br />
-                            <?php foreach ($attributes as $key => $value): ?>
+                            <?php foreach ($attributes as $key => $value) : ?>
                                 <strong><?php echo $key; ?> : </strong> <?php echo $value; ?><br />
-                            <?php endforeach;?>
+                            <?php endforeach; ?>
                         </p>
                     </td>
                 </tr>
@@ -202,19 +201,19 @@ endif;
                     <th class="sdevs_th" scope="row"><label for="bookable_order_status">Status</label></th>
                     <td>
                         <select name="bookable_order_status" id="bookable_order_status">
-                            <?php foreach ($statuses as $value => $label): ?>
+                            <?php foreach ($statuses as $value => $label) : ?>
                                 <option value="<?php echo $value; ?>" <?php if ($post->post_status == $value) {
-            echo "selected";
-        }
-        ?>><?php echo $label; ?></option>
-                            <?php endforeach;?>
+                                                                            echo "selected";
+                                                                        }
+                                                                        ?>><?php echo $label; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </td>
                 </tr>
             </tbody>
         </table>
 <?php
-}
+    }
 
     public function save_bookable_order_post($post_id)
     {
@@ -239,6 +238,21 @@ endif;
         $post_meta         = get_post_meta($post_id, "_booking_order_meta", true);
         $post_meta["date"] = $date;
         $post_meta["time"] = $time;
+        $order_id = $post_meta["order_id"];
+        $order = wc_get_order($order_id);
+        if ($status === "paid") {
+            $order->update_status('processing');
+        } elseif ($status === "unpaid") {
+            $order->update_status('pending');
+        } elseif ($status === "pending_conf") {
+            $order->update_status('reconf');
+        } elseif ($status === "confirmed") {
+            $order->update_status('pending');
+        } elseif ($status === "complete") {
+            $order->update_status('completed');
+        } elseif ($status === "cancelled") {
+            $order->update_status('cancelled');
+        }
         update_post_meta($post_id, "_booking_order_meta", $post_meta);
         $post = array('ID' => $post_id, 'post_status' => $status);
         wp_update_post($post);

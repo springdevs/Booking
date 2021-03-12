@@ -4,6 +4,8 @@
  * Class PaymentGatewayRegister || Add custom Payment Gateway
  */
 
+if(!class_exists('WC_Payment_Gateway')) return;
+
 class PaymentGatewayRegister extends WC_Payment_Gateway
 {
     /**

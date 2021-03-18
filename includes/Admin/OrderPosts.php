@@ -143,12 +143,13 @@ class OrderPosts
     {
         global $post;
         $statuses = [
-            "paid"         => "Paid",
-            "unpaid"       => "Unpaid",
-            "pending_conf" => "Pending Confirmation",
-            "confirmed"    => "Request Confirmed",
-            "complete"     => "Complete",
-            "cancelled"    => "Cancelled",
+            "paid"         => __("Paid", "sdevs_wea"),
+            "processing"   => __("Processing", "sdevs_wea"),
+            "unpaid"       => __("Unpaid", "sdevs_wea"),
+            "pending_conf" => __("Pending Confirmation", "sdevs_wea"),
+            "confirmed"    => __("Request Confirmed", "sdevs_wea"),
+            "complete"     => __("Complete", "sdevs_wea"),
+            "cancelled"    => __("Cancelled", "sdevs_wea"),
         ];
         $post_meta  = get_post_meta($post->ID, "_booking_order_meta", true);
         $product    = wc_get_product($post_meta["product_id"]);
@@ -241,6 +242,8 @@ class OrderPosts
         $order_id = $post_meta["order_id"];
         $order = wc_get_order($order_id);
         if ($status === "paid") {
+            $order->update_status('completed');
+        } elseif ($status === "processing") {
             $order->update_status('processing');
         } elseif ($status === "unpaid") {
             $order->update_status('pending');

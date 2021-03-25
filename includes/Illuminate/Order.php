@@ -27,7 +27,7 @@ class Order
                 break;
 
             case "processing";
-                $post_status = "paid";
+                $post_status = "processing";
                 break;
 
             case "completed";

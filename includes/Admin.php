@@ -9,7 +9,7 @@ use SpringDevs\WcBooking\Admin\OrderPosts;
 use SpringDevs\WcBooking\Illuminate\Gateways;
 use SpringDevs\WcBooking\Illuminate\Order;
 use SpringDevs\WcBooking\Illuminate\OrderPage;
-use SpringDevs\WcBooking\Illuminate\OrderStatus;
+use SpringDevs\WcBooking\Illuminate\Status;
 
 /**
  * The admin class
@@ -23,14 +23,14 @@ class Admin
     public function __construct()
     {
         $this->dispatch_actions();
-        new Menu;
-        new BookingForm;
-        new OrderPage;
-        new Gateways;
-        new BookingOrder;
-        new OrderStatus;
-        new OrderPosts;
-        new Order;
+        new Menu();
+        new BookingForm();
+        new OrderPage();
+        new Gateways();
+        new BookingOrder();
+        new Status();
+        new OrderPosts();
+        new Order();
     }
 
     /**

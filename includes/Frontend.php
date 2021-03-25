@@ -8,7 +8,7 @@ use SpringDevs\WcBooking\Frontend\Products;
 use SpringDevs\WcBooking\Illuminate\Gateways as IlluminateGateways;
 use SpringDevs\WcBooking\Illuminate\Order;
 use SpringDevs\WcBooking\Illuminate\OrderPage;
-use SpringDevs\WcBooking\Illuminate\OrderStatus;
+use SpringDevs\WcBooking\Illuminate\Status;
 
 /**
  * Frontend handler class
@@ -21,12 +21,12 @@ class Frontend
     public function __construct()
     {
         require_once WCBOOKING_ASSETS_INCLUDES . "/Illuminate/PaymentGatewayRegister.php";
-        new Products;
-        new Gateways;
-        new IlluminateGateways;
-        new OrderPage;
-        new MyAccount;
-        new OrderStatus;
-        new Order;
+        new Products();
+        new Gateways();
+        new IlluminateGateways();
+        new OrderPage();
+        new MyAccount();
+        new Status();
+        new Order();
     }
 }

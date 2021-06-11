@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking;
+namespace SpringDevs\Booking;
 
 /**
  * Class Installer
- * @package SpringDevs\WcBooking
+ * @package SpringDevs\Booking
  */
 class Installer
 {

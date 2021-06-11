@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SpringDevs\WcBooking\Illuminate;
+namespace SpringDevs\Booking\Illuminate;
 
 
 class Status

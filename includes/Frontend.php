@@ -1,14 +1,14 @@
 <?php
 
-namespace SpringDevs\WcBooking;
+namespace SpringDevs\Booking;
 
-use SpringDevs\WcBooking\Frontend\Gateways;
-use SpringDevs\WcBooking\Frontend\MyAccount;
-use SpringDevs\WcBooking\Frontend\Products;
-use SpringDevs\WcBooking\Illuminate\Gateways as IlluminateGateways;
-use SpringDevs\WcBooking\Illuminate\Order;
-use SpringDevs\WcBooking\Illuminate\OrderPage;
-use SpringDevs\WcBooking\Illuminate\Status;
+use SpringDevs\Booking\Frontend\Gateways;
+use SpringDevs\Booking\Frontend\MyAccount;
+use SpringDevs\Booking\Frontend\Products;
+use SpringDevs\Booking\Illuminate\Gateways as IlluminateGateways;
+use SpringDevs\Booking\Illuminate\Order;
+use SpringDevs\Booking\Illuminate\OrderPage;
+use SpringDevs\Booking\Illuminate\Status;
 
 /**
  * Frontend handler class

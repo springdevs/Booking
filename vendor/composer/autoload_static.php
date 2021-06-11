@@ -13,15 +13,19 @@ class ComposerStaticInit367b55e933825005714608010427716f
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'SpringDevs\\WcBooking\\' => 21,
+            'SpringDevs\\Booking\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'SpringDevs\\WcBooking\\' => 
+        'SpringDevs\\Booking\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
         ),
+    );
+
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -29,6 +33,7 @@ class ComposerStaticInit367b55e933825005714608010427716f
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit367b55e933825005714608010427716f::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit367b55e933825005714608010427716f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit367b55e933825005714608010427716f::$classMap;
 
         }, null, ClassLoader::class);
     }

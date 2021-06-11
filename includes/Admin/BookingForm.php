@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking\Admin;
+namespace SpringDevs\Booking\Admin;
 
 /**
  * Class BookingForm || Booking Form
- * @package SpringDevs\WcBooking\Admin
+ * @package SpringDevs\Booking\Admin
  */
 class BookingForm
 {

@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'SpringDevs\\WcBooking\\' => array($baseDir . '/includes'),
+    'SpringDevs\\Booking\\' => array($baseDir . '/includes'),
 );

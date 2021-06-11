@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking\Frontend;
+namespace SpringDevs\Booking\Frontend;
 
 /**
  * Class Products
- * @package SpringDevs\WcBooking\Frontend
+ * @package SpringDevs\Booking\Frontend
  */
 class Products
 {

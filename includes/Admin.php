@@ -1,15 +1,15 @@
 <?php
 
-namespace SpringDevs\WcBooking;
+namespace SpringDevs\Booking;
 
-use SpringDevs\WcBooking\Admin\BookingForm;
-use SpringDevs\WcBooking\Admin\BookingOrder;
-use SpringDevs\WcBooking\Admin\Menu;
-use SpringDevs\WcBooking\Admin\OrderPosts;
-use SpringDevs\WcBooking\Illuminate\Gateways;
-use SpringDevs\WcBooking\Illuminate\Order;
-use SpringDevs\WcBooking\Illuminate\OrderPage;
-use SpringDevs\WcBooking\Illuminate\Status;
+use SpringDevs\Booking\Admin\BookingForm;
+use SpringDevs\Booking\Admin\BookingOrder;
+use SpringDevs\Booking\Admin\Menu;
+use SpringDevs\Booking\Admin\OrderPosts;
+use SpringDevs\Booking\Illuminate\Gateways;
+use SpringDevs\Booking\Illuminate\Order;
+use SpringDevs\Booking\Illuminate\OrderPage;
+use SpringDevs\Booking\Illuminate\Status;
 
 /**
  * The admin class

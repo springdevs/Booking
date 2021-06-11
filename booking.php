@@ -1,7 +1,42 @@
 <?php
 /*
- Module Name : simple booking
+Plugin Name: Booking
+Plugin URI: https://wordpress.org/plugins/sdevs-wc-booking
+Description: Show available dates, time in a simple dropdown, take booking for products and services.
+Version: 1.0.0
+Author: SpringDevs
+Author URI: https://springdevs.com/
+License: GPLv2
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: sdevs_booking
+Domain Path: /languages
 */
+
+/**
+ * Copyright (c) 2021 SpringDevs (email: contact@springdevs.com). All rights reserved.
+ *
+ * Released under the GPL license
+ * http://www.opensource.org/licenses/gpl-license.php
+ *
+ * This is an add-on for WordPress
+ * http://wordpress.org/
+ *
+ * **********************************************************************
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ * **********************************************************************
+ */
 
 // don't call the file directly
 if (!defined('ABSPATH')) {
@@ -11,11 +46,11 @@ if (!defined('ABSPATH')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * Sdevs_Wc_Booking class
+ * Sdevs_Booking class
  *
- * @class Sdevs_Wc_Booking The class that holds the entire Wc_Booking plugin
+ * @class Sdevs_Booking The class that holds the entire Wc_Booking plugin
  */
-final class Sdevs_Wc_Booking
+final class Sdevs_Booking
 {
     /**
      * Plugin version
@@ -41,23 +76,26 @@ final class Sdevs_Wc_Booking
     {
         $this->define_constants();
 
+        register_activation_hook(__FILE__, [$this, 'activate']);
+        register_deactivation_hook(__FILE__, [$this, 'deactivate']);
+
         add_action('plugins_loaded', [$this, 'init_plugin']);
     }
 
     /**
-     * Initializes the Sdevs_Wc_Booking() class
+     * Initializes the Sdevs_Booking() class
      *
-     * Checks for an existing Sdevs_Wc_Booking() instance
+     * Checks for an existing Sdevs_Booking() instance
      * and if it doesn't find one, creates it.
      *
-     * @return Sdevs_Wc_Booking|bool
+     * @return Sdevs_Booking|bool
      */
     public static function init()
     {
         static $instance = false;
 
         if (!$instance) {
-            $instance = new Sdevs_Wc_Booking();
+            $instance = new Sdevs_Booking();
         }
 
         return $instance;
@@ -119,6 +157,26 @@ final class Sdevs_Wc_Booking
     }
 
     /**
+     * Placeholder for activation function
+     *
+     * Nothing being called here yet.
+     */
+    public function activate()
+    {
+        $installer = new SpringDevs\Booking\Installer();
+        $installer->run();
+    }
+
+    /**
+     * Placeholder for deactivation function
+     *
+     * Nothing being called here yet.
+     */
+    public function deactivate()
+    {
+    }
+
+    /**
      * Include the required files
      *
      * @return void
@@ -126,11 +184,11 @@ final class Sdevs_Wc_Booking
     public function includes()
     {
         if ($this->is_request('admin')) {
-            $this->container['admin'] = new SpringDevs\WcBooking\Admin();
+            $this->container['admin'] = new SpringDevs\Booking\Admin();
         }
 
         if ($this->is_request('frontend')) {
-            $this->container['frontend'] = new SpringDevs\WcBooking\Frontend();
+            $this->container['frontend'] = new SpringDevs\Booking\Frontend();
         }
 
         if ($this->is_request('ajax')) {
@@ -146,6 +204,9 @@ final class Sdevs_Wc_Booking
     public function init_hooks()
     {
         add_action('init', [$this, 'init_classes']);
+
+        // Localize our plugin
+        add_action('init', [$this, 'localization_setup']);
     }
 
     /**
@@ -156,11 +217,21 @@ final class Sdevs_Wc_Booking
     public function init_classes()
     {
         if ($this->is_request('ajax')) {
-            // $this->container['ajax'] =  new SpringDevs\WcBooking\Ajax();
+            // $this->container['ajax'] =  new SpringDevs\Booking\Ajax();
         }
 
-        $this->container['api']    = new SpringDevs\WcBooking\Api();
-        $this->container['assets'] = new SpringDevs\WcBooking\Assets();
+        $this->container['api']    = new SpringDevs\Booking\Api();
+        $this->container['assets'] = new SpringDevs\Booking\Assets();
+    }
+
+    /**
+     * Initialize plugin for localization
+     *
+     * @uses load_plugin_textdomain()
+     */
+    public function localization_setup()
+    {
+        load_plugin_textdomain('sdevs_booking', false, dirname(plugin_basename(__FILE__)) . '/languages/');
     }
 
     /**
@@ -194,14 +265,14 @@ final class Sdevs_Wc_Booking
 /**
  * Initialize the main plugin
  *
- * @return Sdevs_Wc_Booking|bool
+ * @return Sdevs_Booking|bool
  */
-function sdevs_wc_booking()
+function sdevs_booking()
 {
-    return Sdevs_Wc_Booking::init();
+    return Sdevs_Booking::init();
 }
 
 /**
  *  kick-off the plugin
  */
-sdevs_wc_booking();
+sdevs_booking();

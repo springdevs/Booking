@@ -28,9 +28,8 @@ class BookingForm
 
     public function custom_tab_data()
     {
-        if (sdevs_is_pro_module_activate('booking-pro')) {
+        if (sdevs_booking_pro_activated()) {
             do_action('sdevs_booking_pro_edit_fields_html');
-            return;
         } else {
             $screen = get_current_screen();
             if ($screen->parent_base == "edit") :
@@ -113,7 +112,7 @@ class BookingForm
             return;
         }
 
-        if (sdevs_is_pro_module_activate('booking-pro')) {
+        if (sdevs_booking_pro_activated()) {
             return;
         }
 

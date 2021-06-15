@@ -98,7 +98,7 @@ class Products
         // Only on bookable products
         if (!(!empty($post_meta) && $post_meta["enable_booking"])) return;
 
-        if (sdevs_is_pro_module_activate('booking-pro')) {
+        if (sdevs_booking_pro_activated()) {
             do_action('sdevs_booking_pro_single_date_time_html', $product, $post_meta);
         } else {
             $dateFields = [];

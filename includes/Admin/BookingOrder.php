@@ -13,6 +13,7 @@ class BookingOrder
     public function __construct()
     {
         add_action("init", [$this, "create_post_type"]);
+        add_action("admin_enqueue_scripts", [$this, "enqueue_scripts"]);
         add_filter('post_row_actions', [$this, 'post_row_actions'], 10, 2);
         add_filter('manage_bookable_order_posts_columns', [$this, 'add_custom_columns']);
         add_action('manage_bookable_order_posts_custom_column', [$this, 'add_custom_columns_data'], 10, 2);
@@ -70,6 +71,11 @@ class BookingOrder
         register_post_type("bookable_order", $args);
     }
 
+    public function enqueue_scripts()
+    {
+        wp_enqueue_style('sdevs_booking_admin_styles');
+    }
+
     /**
      * @param $unset_actions
      * @param $post
@@ -90,10 +96,12 @@ class BookingOrder
         $columns['booked'] = __('Booked', 'sdevs_wea');
         $columns['order_id'] = __('Order', 'sdevs_wea');
         $columns['customer'] = __('Customer', 'sdevs_wea');
+        $columns['booking_status'] = __('Status', 'sdevs_wea');
         $new = [];
         $order_id = $columns['order_id'];
         $booked = $columns['booked'];
         $customer = $columns['customer'];
+        $booking_status = $columns['booking_status'];
         unset($columns['booked']);
 
         foreach ($columns as $key => $value) {
@@ -101,6 +109,7 @@ class BookingOrder
                 $new['order_id'] = $order_id;
                 $new['customer'] = $customer;
                 $new['booked'] = $booked;
+                $new['booking_status'] = $booking_status;
             }
             $new[$key] = $value;
         }
@@ -141,6 +150,17 @@ class BookingOrder
 <?php
         } elseif ($column == "order_id") {
             echo "<a href=" . get_edit_post_link($post_meta["order_id"]) . " target='__blank'>" . $post_meta["order_id"] . "</a>";
+        } elseif ($column == "booking_status") {
+            $status = [
+                "paid"         => __("Paid", "sdevs_wea"),
+                "processing"   => __("Processing", "sdevs_wea"),
+                "unpaid"       => __("Unpaid", "sdevs_wea"),
+                "pending_conf" => __("Pending Confirmation", "sdevs_wea"),
+                "confirmed"    => __("Request Confirmed", "sdevs_wea"),
+                "complete"     => __("Complete", "sdevs_wea"),
+                "cancelled"    => __("Cancelled", "sdevs_wea"),
+            ];
+            echo $status[get_post_status($post_id)];
         }
     }
 }

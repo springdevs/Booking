@@ -2,10 +2,10 @@
 
 namespace SpringDevs\Booking;
 
-use SpringDevs\Booking\Admin\BookingForm;
-use SpringDevs\Booking\Admin\BookingOrder;
+use SpringDevs\Booking\Admin\Product;
+use SpringDevs\Booking\Admin\Post;
 use SpringDevs\Booking\Admin\Menu;
-use SpringDevs\Booking\Admin\OrderPosts;
+use SpringDevs\Booking\Admin\Bookings;
 use SpringDevs\Booking\Illuminate\Gateways;
 use SpringDevs\Booking\Illuminate\Order;
 use SpringDevs\Booking\Illuminate\OrderPage;
@@ -24,12 +24,12 @@ class Admin
     {
         $this->dispatch_actions();
         new Menu();
-        new BookingForm();
+        new Product();
         new OrderPage();
         new Gateways();
-        new BookingOrder();
+        new Post();
         new Status();
-        new OrderPosts();
+        new Bookings();
         new Order();
     }
 

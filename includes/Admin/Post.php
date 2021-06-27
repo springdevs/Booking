@@ -5,10 +5,10 @@ namespace SpringDevs\Booking\Admin;
 
 
 /**
- * Class BookingOrder
+ * Class Post
  * @package SpringDevs\Booking\Admin
  */
-class BookingOrder
+class Post
 {
     public function __construct()
     {
@@ -25,25 +25,25 @@ class BookingOrder
     public function create_post_type()
     {
         $labels = array(
-            "name" => __("Bookings", "sdevs_wea"),
-            "singular_name" => __("Booking", "sdevs_wea"),
-            'name_admin_bar'        => __('Booking\'s', 'sdevs_wea'),
-            'archives'              => __('Item Archives', 'sdevs_wea'),
-            'attributes'            => __('Item Attributes', 'sdevs_wea'),
-            'parent_item_colon'     => __('Parent :', 'sdevs_wea'),
-            'all_items'             => __('Bookings', 'sdevs_wea'),
-            'add_new_item'          => __('Add New Booking', 'sdevs_wea'),
-            'add_new'               => __('Add Booking', 'sdevs_wea'),
-            'new_item'              => __('New Booking', 'sdevs_wea'),
-            'edit_item'             => __('Edit Booking', 'sdevs_wea'),
-            'update_item'           => __('Update Booking', 'sdevs_wea'),
-            'view_item'             => __('View Booking', 'sdevs_wea'),
-            'view_items'            => __('View Booking', 'sdevs_wea'),
-            'search_items'          => __('Search Booking', 'sdevs_wea'),
+            "name" => __("Bookings", "sdevs_booking"),
+            "singular_name" => __("Booking", "sdevs_booking"),
+            'name_admin_bar'        => __('Booking\'s', 'sdevs_booking'),
+            'archives'              => __('Item Archives', 'sdevs_booking'),
+            'attributes'            => __('Item Attributes', 'sdevs_booking'),
+            'parent_item_colon'     => __('Parent :', 'sdevs_booking'),
+            'all_items'             => __('Bookings', 'sdevs_booking'),
+            'add_new_item'          => __('Add New Booking', 'sdevs_booking'),
+            'add_new'               => __('Add Booking', 'sdevs_booking'),
+            'new_item'              => __('New Booking', 'sdevs_booking'),
+            'edit_item'             => __('Edit Booking', 'sdevs_booking'),
+            'update_item'           => __('Update Booking', 'sdevs_booking'),
+            'view_item'             => __('View Booking', 'sdevs_booking'),
+            'view_items'            => __('View Booking', 'sdevs_booking'),
+            'search_items'          => __('Search Booking', 'sdevs_booking'),
         );
 
         $args = array(
-            "label" => __("Bookings", "sdevs_wea"),
+            "label" => __("Bookings", "sdevs_booking"),
             "labels" => $labels,
             "description" => "",
             "public" => false,
@@ -93,10 +93,10 @@ class BookingOrder
 
     public function add_custom_columns($columns)
     {
-        $columns['booked'] = __('Booked', 'sdevs_wea');
-        $columns['order_id'] = __('Order', 'sdevs_wea');
-        $columns['customer'] = __('Customer', 'sdevs_wea');
-        $columns['booking_status'] = __('Status', 'sdevs_wea');
+        $columns['booked'] = __('Booked', 'sdevs_booking');
+        $columns['order_id'] = __('Order', 'sdevs_booking');
+        $columns['customer'] = __('Customer', 'sdevs_booking');
+        $columns['booking_status'] = __('Status', 'sdevs_booking');
         $new = [];
         $order_id = $columns['order_id'];
         $booked = $columns['booked'];
@@ -152,13 +152,13 @@ class BookingOrder
             echo "<a href=" . get_edit_post_link($post_meta["order_id"]) . " target='__blank'>" . $post_meta["order_id"] . "</a>";
         } elseif ($column == "booking_status") {
             $status = [
-                "paid"         => __("Paid", "sdevs_wea"),
-                "processing"   => __("Processing", "sdevs_wea"),
-                "unpaid"       => __("Unpaid", "sdevs_wea"),
-                "pending_conf" => __("Pending Confirmation", "sdevs_wea"),
-                "confirmed"    => __("Request Confirmed", "sdevs_wea"),
-                "complete"     => __("Complete", "sdevs_wea"),
-                "cancelled"    => __("Cancelled", "sdevs_wea"),
+                "paid"         => __("Paid", "sdevs_booking"),
+                "processing"   => __("Processing", "sdevs_booking"),
+                "unpaid"       => __("Unpaid", "sdevs_booking"),
+                "pending_conf" => __("Pending Confirmation", "sdevs_booking"),
+                "confirmed"    => __("Request Confirmed", "sdevs_booking"),
+                "complete"     => __("Complete", "sdevs_booking"),
+                "cancelled"    => __("Cancelled", "sdevs_booking"),
             ];
             echo $status[get_post_status($post_id)];
         }

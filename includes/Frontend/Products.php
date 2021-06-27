@@ -36,7 +36,7 @@ class Products
         if ($product->is_type('variable')) return;
         $status = $this->check_product_in_request($product->get_id());
         if ($status) {
-            _e('<strong>You already request this product !!</strong>', 'sdevs_wea');
+            _e('<strong>You already request this product !!</strong>', 'sdevs_booking');
         }
     }
 
@@ -73,7 +73,7 @@ class Products
     {
         $book_meta = get_post_meta($product->get_ID(), "bookable_product_meta", true);
         if (!empty($book_meta) && $book_meta["enable_booking"]) {
-            $button_text = __("Read more", "sdevs_wea");
+            $button_text = __("Read more", "sdevs_booking");
             $button = '<a class="button" href="' . $product->get_permalink() . '">' . $button_text . '</a>';
             return $button;
         } else {
@@ -115,7 +115,7 @@ class Products
     <select class="booking-date" name="booking-date" id="booking-date">
         <option value="">' . __("Choose your Date") . '</option>';
             foreach ($dateFields as $dateField) {
-                echo '<option value="' . $dateField . '">' . __($dateField, "sdevs_wea") . '</option>';
+                echo '<option value="' . $dateField . '">' . __($dateField, "sdevs_booking") . '</option>';
             }
             echo '</select>
     </p><br>';
@@ -137,7 +137,7 @@ class Products
     <select class="booking-time" name="booking-time" id="booking-time">
         <option value="">' . __("Choose your Time") . '</option>';
             foreach ($timeFields as $timeField) {
-                echo '<option value="' . $timeField . '">' . __($timeField, "sdevs_wea") . '</option>';
+                echo '<option value="' . $timeField . '">' . __($timeField, "sdevs_booking") . '</option>';
             }
             echo '</select>
     </p><br>';
@@ -152,10 +152,10 @@ class Products
             return $passed;
 
         if (isset($_POST['booking-date']) && empty($_POST['booking-date'])) {
-            wc_add_notice(__("Please choose your Date.", "sdevs_wea"), 'error');
+            wc_add_notice(__("Please choose your Date.", "sdevs_booking"), 'error');
             $passed = false;
         } elseif (isset($_POST['booking-time']) && empty($_POST["booking-time"])) {
-            wc_add_notice(__("Please choose your Time.", "sdevs_wea"), 'error');
+            wc_add_notice(__("Please choose your Time.", "sdevs_booking"), 'error');
             $passed = false;
         }
         return $passed;
@@ -170,7 +170,7 @@ class Products
             $post_meta = get_post_meta($_product->get_id(), "bookable_product_meta", true);
             if (!empty($post_meta) && $post_meta["enable_booking"] && $post_meta["bookable_require_conf"]) :
                 $cartProductStatus = false;
-                $error_notice = __("Currently You have Confirmation product in a cart !!", "sdevs_wea");
+                $error_notice = __("Currently You have Confirmation product in a cart !!", "sdevs_booking");
                 if (!empty($current_product_meta) && $current_product_meta["enable_booking"]) :
                     if ($current_product_meta["bookable_require_conf"]) :
                         $cartProductStatus = true;
@@ -178,7 +178,7 @@ class Products
                 endif;
             else :
                 if (!empty($current_product_meta) && $current_product_meta["enable_booking"] && $current_product_meta["bookable_require_conf"]) :
-                    $error_notice = __("Currently You have Non-Confirmation product in a cart !!", "sdevs_wea");
+                    $error_notice = __("Currently You have Non-Confirmation product in a cart !!", "sdevs_booking");
                     $cartProductStatus = false;
                 endif;
             endif;
@@ -195,9 +195,9 @@ class Products
         $book_meta = get_post_meta(get_the_ID(), "bookable_product_meta", true);
         if (!empty($book_meta) && $book_meta["enable_booking"]) {
             if ($book_meta["bookable_require_conf"]) {
-                return __('Check Availability', 'sdevs_wea');
+                return __('Check Availability', 'sdevs_booking');
             } else {
-                return __('Book Now', 'sdevs_wea');
+                return __('Book Now', 'sdevs_booking');
             }
         } else {
             return $text;
@@ -219,13 +219,13 @@ class Products
     {
         if (isset($cart_item['booking-date'])) {
             $cart_item_data[] = array(
-                'name' => __('Date', 'sdevs_wea'),
+                'name' => __('Date', 'sdevs_booking'),
                 'value' => $cart_item['booking-date'],
             );
         }
         if (isset($cart_item['booking-time'])) {
             $cart_item_data[] = array(
-                'name' => __('Time', 'sdevs_wea'),
+                'name' => __('Time', 'sdevs_booking'),
                 'value' => $cart_item['booking-time'],
             );
         }

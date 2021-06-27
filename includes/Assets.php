@@ -87,7 +87,11 @@ class Assets
     {
         $plugin_css_assets_path = WCBOOKING_ASSETS_ASSETS . '/css/';
 
-        $styles = [];
+        $styles = [
+            "sdevs_booking_admin_styles" => [
+                "src" => $plugin_css_assets_path . 'admin.css'
+            ]
+        ];
 
         return $styles;
     }

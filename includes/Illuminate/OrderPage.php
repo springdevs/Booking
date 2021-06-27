@@ -28,7 +28,7 @@ class OrderPage
 
     public function custom_order_status($order_statuses)
     {
-        $order_statuses['wc-reconf'] = _x('Require Confirmation', 'Order status', 'sdevs_wea');
+        $order_statuses['wc-reconf'] = _x('Require Confirmation', 'Order status', 'sdevs_booking');
         return $order_statuses;
     }
 }

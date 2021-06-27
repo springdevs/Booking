@@ -50,7 +50,7 @@ class MyAccount
     {
         $logout = $items['customer-logout'];
         unset($items['customer-logout']);
-        $items['bookable-endpoint'] = __('Bookings', 'sdevs_wea');
+        $items['bookable-endpoint'] = __('Bookings', 'sdevs_booking');
         $items['customer-logout'] = $logout;
         return $items;
     }

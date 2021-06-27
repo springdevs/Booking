@@ -3,10 +3,10 @@
 namespace SpringDevs\Booking\Admin;
 
 /**
- * Class BookingForm || Booking Form
+ * Class Product
  * @package SpringDevs\Booking\Admin
  */
-class BookingForm
+class Product
 {
     public function __construct()
     {
@@ -19,7 +19,7 @@ class BookingForm
     {
         $class                 = apply_filters('sdevs_booking_product_data_class', 'show_if_simple');
         $tabs['sdevs_booking'] = array(
-            'label'  => __('Booking', 'sdevs_wea'),
+            'label'  => __('Booking', 'sdevs_booking'),
             'class'  => $class,
             'target' => 'sdevs_booking_data',
         );
@@ -54,55 +54,8 @@ class BookingForm
                 $display_end_time      = "";
                 $bookable_require_conf = false;
             endif;
-            $class = apply_filters('sdevs_booking_product_data_class', ''); ?>
-            <div id="sdevs_booking_data" class="panel sdevs_panel woocommerce_options_panel sdevs-form <?php echo $class; ?>">
-                <strong><?php _e('Booking Settings', 'sdevs_wea'); ?></strong>
-                <?php
-                wp_nonce_field("_product_booking_nonce", "_product_booking_nonce", false);
-                woocommerce_wp_checkbox([
-                    "id"          => "enable_booking",
-                    "label"       => __("Enable Booking", "sdevs_wea"),
-                    "value"       => $enable_booking,
-                    "cbvalue"     => "yes",
-                    "description" => __("check this box to enable booking for this product", "sdevs_wea"),
-                    "desc_tip"    => true,
-                ]);
-
-                woocommerce_wp_checkbox([
-                    "id"          => "bookable_require_conf",
-                    "label"       => __("Require Confirmations", "sdevs_wea"),
-                    "value"       => "yes",
-                    "cbvalue"     => $bookable_require_conf,
-                    "description" => __("check this box if admin approval / confirmation is required for booking", "sdevs_wea"),
-                    "desc_tip"    => true,
-                ]);
-
-                echo "<hr style='margin: 20px 0;' /><strong>Calendar Display Options</strong>";
-
-                woocommerce_wp_text_input([
-                    "id"    => "display_next_days",
-                    "label" => __('Display Next Days', 'sdevs_wea'),
-                    "type"  => "number",
-                    "value" => $display_next_days,
-                ]);
-
-                woocommerce_wp_text_input([
-                    "id"    => "display_start_time",
-                    "label" => __('Display Start Time', 'sdevs_wea'),
-                    "type"  => "time",
-                    "value" => $display_start_time,
-                ]);
-
-                woocommerce_wp_text_input([
-                    "id"    => "display_end_time",
-                    "label" => __('Display End Time', 'sdevs_wea'),
-                    "type"  => "time",
-                    "value" => $display_end_time,
-                ]);
-
-                ?>
-            </div>
-<?php
+            $class = apply_filters('sdevs_booking_product_data_class', '');
+            include 'views/product-form.php';
         }
     }
 

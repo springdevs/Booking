@@ -40,6 +40,6 @@ class Admin
      */
     public function dispatch_actions()
     {
-        require_once WCBOOKING_ASSETS_INCLUDES . "/Illuminate/PaymentGatewayRegister.php";
+        require_once SDEVS_BOOKING_INCLUDES . "/Illuminate/PaymentGatewayRegister.php";
     }
 }

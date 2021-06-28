@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Booking
-Plugin URI: https://wordpress.org/plugins/sdevs-wc-booking
+Plugin URI: https://wordpress.org/plugins/wc-booking
 Description: Show available dates, time in a simple dropdown, take booking for products and services.
 Version: 1.0.0
 Author: SpringDevs
@@ -57,7 +57,7 @@ final class Sdevs_Booking
      *
      * @var string
      */
-    const version = '1.0.1';
+    const version = '1.0.0';
 
     /**
      * Holds various class instances
@@ -136,13 +136,13 @@ final class Sdevs_Booking
      */
     public function define_constants()
     {
-        define('WCBOOKING_ASSETS_VERSION', self::version);
-        define('WCBOOKING_ASSETS_FILE', __FILE__);
-        define('WCBOOKING_ASSETS_PATH', dirname(WCBOOKING_ASSETS_FILE));
-        define('WCBOOKING_ASSETS_INCLUDES', WCBOOKING_ASSETS_PATH . '/includes');
-        define('WCBOOKING_TEMPLATES', WCBOOKING_ASSETS_PATH . '/templates/');
-        define('WCBOOKING_ASSETS_URL', plugins_url('', WCBOOKING_ASSETS_FILE));
-        define('WCBOOKING_ASSETS_ASSETS', WCBOOKING_ASSETS_URL . '/assets');
+        define('SDEVS_BOOKING_VERSION', self::version);
+        define('SDEVS_BOOKING_FILE', __FILE__);
+        define('SDEVS_BOOKING_PATH', dirname(SDEVS_BOOKING_FILE));
+        define('SDEVS_BOOKING_INCLUDES', SDEVS_BOOKING_PATH . '/includes');
+        define('SDEVS_BOOKING_TEMPLATES', SDEVS_BOOKING_PATH . '/templates/');
+        define('SDEVS_BOOKING_URL', plugins_url('', SDEVS_BOOKING_FILE));
+        define('SDEVS_BOOKING_ASSETS', SDEVS_BOOKING_URL . '/assets');
     }
 
     /**
@@ -192,7 +192,7 @@ final class Sdevs_Booking
         }
 
         if ($this->is_request('ajax')) {
-            // require_once WCBOOKING_ASSETS_INCLUDES . '/class-ajax.php';
+            // require_once SDEVS_BOOKING_INCLUDES . '/class-ajax.php';
         }
     }
 

@@ -20,7 +20,7 @@ class Frontend
      */
     public function __construct()
     {
-        require_once WCBOOKING_ASSETS_INCLUDES . "/Illuminate/PaymentGatewayRegister.php";
+        require_once SDEVS_BOOKING_INCLUDES . "/Illuminate/PaymentGatewayRegister.php";
         new Products();
         new Gateways();
         new IlluminateGateways();

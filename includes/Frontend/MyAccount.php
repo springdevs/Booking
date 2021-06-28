@@ -60,6 +60,6 @@ class MyAccount
      */
     public function bookable_endpoint_content()
     {
-        wc_get_template('myaccount/bookings.php', [], 'simple-booking', WCBOOKING_TEMPLATES);
+        wc_get_template('myaccount/bookings.php', [], 'simple-booking', SDEVS_BOOKING_TEMPLATES);
     }
 }

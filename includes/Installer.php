@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking;
+namespace SpringDevs\Booking;
 
 /**
  * Class Installer
- * @package SpringDevs\WcBooking
+ * @package SpringDevs\Booking
  */
 class Installer
 {
@@ -34,7 +34,7 @@ class Installer
             wp_insert_term('bookable', 'product_type');
         }
 
-        update_option('simple booking_version', WCBOOKING_ASSETS_VERSION);
+        update_option('simple booking_version', SDEVS_BOOKING_VERSION);
     }
 
     /**

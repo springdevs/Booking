@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking\Frontend;
+namespace SpringDevs\Booking\Frontend;
 
 /**
  * Class Gateways
- * @package SpringDevs\WcBooking\Frontend
+ * @package SpringDevs\Booking\Frontend
  */
 
 class Gateways
@@ -27,7 +27,7 @@ class Gateways
 
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
             $book_meta = get_post_meta($cart_item['product_id'], "bookable_product_meta", true);
-            if (!empty($book_meta) && $book_meta["enable_booking"]):
+            if (!empty($book_meta) && $book_meta["enable_booking"]) :
                 $book_meta["bookable_require_conf"] ? $bookable = true : false;
             endif;
         }

@@ -1,15 +1,15 @@
 <?php
 
-namespace SpringDevs\WcBooking;
+namespace SpringDevs\Booking;
 
-use SpringDevs\WcBooking\Admin\BookingForm;
-use SpringDevs\WcBooking\Admin\BookingOrder;
-use SpringDevs\WcBooking\Admin\Menu;
-use SpringDevs\WcBooking\Admin\OrderPosts;
-use SpringDevs\WcBooking\Illuminate\Gateways;
-use SpringDevs\WcBooking\Illuminate\Order;
-use SpringDevs\WcBooking\Illuminate\OrderPage;
-use SpringDevs\WcBooking\Illuminate\Status;
+use SpringDevs\Booking\Admin\Product;
+use SpringDevs\Booking\Admin\Post;
+use SpringDevs\Booking\Admin\Menu;
+use SpringDevs\Booking\Admin\Bookings;
+use SpringDevs\Booking\Illuminate\Gateways;
+use SpringDevs\Booking\Illuminate\Order;
+use SpringDevs\Booking\Illuminate\OrderPage;
+use SpringDevs\Booking\Illuminate\Status;
 
 /**
  * The admin class
@@ -24,12 +24,12 @@ class Admin
     {
         $this->dispatch_actions();
         new Menu();
-        new BookingForm();
+        new Product();
         new OrderPage();
         new Gateways();
-        new BookingOrder();
+        new Post();
         new Status();
-        new OrderPosts();
+        new Bookings();
         new Order();
     }
 
@@ -40,6 +40,6 @@ class Admin
      */
     public function dispatch_actions()
     {
-        require_once WCBOOKING_ASSETS_INCLUDES . "/Illuminate/PaymentGatewayRegister.php";
+        require_once SDEVS_BOOKING_INCLUDES . "/Illuminate/PaymentGatewayRegister.php";
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking\Illuminate;
+namespace SpringDevs\Booking\Illuminate;
 
 /**
  * Class Order
- * @package SpringDevs\WcBooking\Illuminate
+ * @package SpringDevs\Booking\Illuminate
  */
 class Order
 {

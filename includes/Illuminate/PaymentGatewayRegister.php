@@ -16,9 +16,9 @@ class PaymentGatewayRegister extends WC_Payment_Gateway
         $this->id                = 'wc-booking-gateway';
         $this->icon              = '';
         $this->has_fields        = false;
-        $this->method_title      = __('Check booking availability', 'sdevs_wea');
+        $this->method_title      = __('Check booking availability', 'sdevs_booking');
         $this->title             = $this->method_title;
-        $this->order_button_text = __('Request Confirmation', 'sdevs_wea');
+        $this->order_button_text = __('Request Confirmation', 'sdevs_booking');
 
         add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
     }
@@ -28,12 +28,12 @@ class PaymentGatewayRegister extends WC_Payment_Gateway
      */
     public function admin_options()
     {
-        $title = (!empty($this->method_title)) ? $this->method_title : __('Settings', 'sdevs_wea');
+        $title = (!empty($this->method_title)) ? $this->method_title : __('Settings', 'sdevs_booking');
 
         echo '<h3>' . esc_html($title) . '</h3>';
 
-        echo '<p>' . esc_html__('This is fictitious payment method used for bookings that requires confirmation.', 'sdevs_wea') . '</p>';
-        echo '<p>' . esc_html__('This gateway requires no configuration.', 'sdevs_wea') . '</p>';
+        echo '<p>' . esc_html__('This is fictitious payment method used for bookings that requires confirmation.', 'sdevs_booking') . '</p>';
+        echo '<p>' . esc_html__('This gateway requires no configuration.', 'sdevs_booking') . '</p>';
 
         // Hides the save button
         echo '<style>p.submit input[type="submit"] { display: none }</style>';
@@ -51,7 +51,7 @@ class PaymentGatewayRegister extends WC_Payment_Gateway
         $order = new WC_Order($order_id);
 
         // Add custom order note.
-        $order->add_order_note(__('This order is awaiting confirmation from the shop manager', 'sdevs_wea'));
+        $order->add_order_note(__('This order is awaiting confirmation from the shop manager', 'sdevs_booking'));
 
         // Remove cart
         WC()->cart->empty_cart();
@@ -71,9 +71,9 @@ class PaymentGatewayRegister extends WC_Payment_Gateway
         $order = new WC_Order($order_id);
 
         if ('completed' == $order->get_status()) {
-            echo '<p>' . esc_html__('Your booking has been confirmed. Thank you.', 'sdevs_wea') . '</p>';
+            echo '<p>' . esc_html__('Your booking has been confirmed. Thank you.', 'sdevs_booking') . '</p>';
         } else {
-            echo '<p>' . esc_html__('Your booking is awaiting confirmation. You will be notified by email as soon as we\'ve confirmed availability.', 'sdevs_wea') . '</p>';
+            echo '<p>' . esc_html__('Your booking is awaiting confirmation. You will be notified by email as soon as we\'ve confirmed availability.', 'sdevs_booking') . '</p>';
         }
     }
 }

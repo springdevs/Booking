@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking\Admin;
+namespace SpringDevs\Booking\Admin;
 
 /**
  * Class Menu || admin menu here
- * @package SpringDevs\WcBooking\Admin
+ * @package SpringDevs\Booking\Admin
  */
 class Menu
 {

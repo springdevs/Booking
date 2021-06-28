@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking\Illuminate;
+namespace SpringDevs\Booking\Illuminate;
 
 /**
  * Class OrderPage || Customize Order
- * @package SpringDevs\WcBooking\Illuminate
+ * @package SpringDevs\Booking\Illuminate
  */
 class OrderPage
 {
@@ -28,7 +28,7 @@ class OrderPage
 
     public function custom_order_status($order_statuses)
     {
-        $order_statuses['wc-reconf'] = _x('Require Confirmation', 'Order status', 'sdevs_wea');
+        $order_statuses['wc-reconf'] = _x('Require Confirmation', 'Order status', 'sdevs_booking');
         return $order_statuses;
     }
 }

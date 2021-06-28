@@ -1,10 +1,10 @@
 <?php
 
-namespace SpringDevs\WcBooking\Illuminate;
+namespace SpringDevs\Booking\Illuminate;
 
 /**
  * Class Gateways
- * @package SpringDevs\WcBooking\Global
+ * @package SpringDevs\Booking\Global
  */
 
 class Gateways

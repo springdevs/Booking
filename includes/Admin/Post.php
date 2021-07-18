@@ -132,24 +132,28 @@ class Post
         }
         if ($column == "booked") {
 ?>
-            <a href="<?php the_permalink($post_meta["product_id"]); ?>"><?php echo $product->get_title(); ?></a>
+            <a href="<?php the_permalink($post_meta["product_id"]); ?>">
+                <?php echo esc_html($product->get_title()); ?>
+            </a>
             <br />
             <?php foreach ($attributes as $key => $value) : ?>
-                <strong><?php echo $key; ?> : </strong> <?php echo $value; ?> <br />
+                <strong><?php echo esc_html($key); ?> : </strong> <?php echo esc_html($value); ?> <br />
             <?php endforeach; ?>
             <hr />
-            <?php echo $post_meta["date"] . ' - ' . $post_meta["time"]; ?>
         <?php
+            echo $post_meta["date"] . ' - ' . $post_meta["time"];
         } elseif ($column == "customer") {
+            echo $order->get_formatted_billing_full_name();
         ?>
-            <?php echo $order->get_formatted_billing_full_name(); ?>
             <br />
-            <a href="mailto:<?php echo $order->get_billing_email(); ?>"><?php echo $order->get_billing_email(); ?></a>
+            <a href="mailto:<?php echo esc_html($order->get_billing_email()); ?>"><?php echo esc_html($order->get_billing_email()); ?></a>
             <br />
-            Phone : <a href="tel:<?php echo $order->get_billing_phone(); ?>"><?php echo $order->get_billing_phone(); ?></a>
-<?php
+            <?php echo esc_html__("Phone :", "sdevs_booking"); ?> <a href="tel:<?php echo esc_html($order->get_billing_phone()); ?>"><?php echo esc_html($order->get_billing_phone()); ?></a>
+        <?php
         } elseif ($column == "order_id") {
-            echo "<a href=" . get_edit_post_link($post_meta["order_id"]) . " target='__blank'>" . $post_meta["order_id"] . "</a>";
+        ?>
+            <a href="<?php echo esc_html(get_edit_post_link($post_meta["order_id"])); ?>" target='__blank'><?php echo esc_html($post_meta["order_id"]); ?></a>
+<?php
         } elseif ($column == "booking_status") {
             $status = [
                 "paid"         => __("Paid", "sdevs_booking"),
@@ -160,7 +164,7 @@ class Post
                 "complete"     => __("Complete", "sdevs_booking"),
                 "cancelled"    => __("Cancelled", "sdevs_booking"),
             ];
-            echo $status[get_post_status($post_id)];
+            echo esc_html($status[get_post_status($post_id)]);
         }
     }
 }

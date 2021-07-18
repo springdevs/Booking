@@ -5,7 +5,7 @@
             <td>
                 <p class="description" id="tagline-description">
                     <a href="<?php the_permalink($post_meta["product_id"]); ?>" target="_blank">
-                        <?php echo $product->get_title(); ?>
+                        <?php echo esc_html($product->get_title()); ?>
                     </a>
                     <br />
                     <?php foreach ($attributes as $key => $value) : ?>

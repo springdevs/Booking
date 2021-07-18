@@ -108,17 +108,7 @@ class Products
                 array_push($dateFields, date('M d, Y', $date));
             }
 
-            $required = '&nbsp;<abbr class="required" title="required">*</abbr></label>';
-
-            echo '<p class="form-row form-row-wide" id="booking-date-field">
-    <label for="booking-date">' . __('Select Date') . $required . '</label>
-    <select class="booking-date" name="booking-date" id="booking-date">
-        <option value="">' . __("Choose your Date") . '</option>';
-            foreach ($dateFields as $dateField) {
-                echo '<option value="' . $dateField . '">' . __($dateField, "sdevs_booking") . '</option>';
-            }
-            echo '</select>
-    </p><br>';
+            include 'views/date-html.php';
 
             $timeFields = [];
 
@@ -132,15 +122,7 @@ class Products
                 $timeFields[] = $curr_time;
             }
 
-            echo '<p class="form-row form-row-wide" id="booking-time-field">
-    <label for="booking-time">' . __('Select Time') . $required . '</label>
-    <select class="booking-time" name="booking-time" id="booking-time">
-        <option value="">' . __("Choose your Time") . '</option>';
-            foreach ($timeFields as $timeField) {
-                echo '<option value="' . $timeField . '">' . __($timeField, "sdevs_booking") . '</option>';
-            }
-            echo '</select>
-    </p><br>';
+            include 'views/time-html.php';
         }
     }
 

@@ -189,10 +189,10 @@ class Products
     public function add_to_cart_item_data($cart_item_data, $product_id, $variation_id)
     {
         if (isset($_POST['booking-date'])) {
-            $cart_item_data['booking-date'] = esc_attr($_POST['booking-date']);
+            $cart_item_data['booking-date'] = sanitize_text_field($_POST['booking-date']);
         }
         if (isset($_POST['booking-time'])) {
-            $cart_item_data['booking-time'] = esc_attr($_POST['booking-time']);
+            $cart_item_data['booking-time'] = sanitize_text_field($_POST['booking-time']);
         }
         return $cart_item_data;
     }

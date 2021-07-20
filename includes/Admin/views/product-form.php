@@ -1,5 +1,5 @@
-<div id="sdevs_booking_data" class="panel sdevs_panel woocommerce_options_panel sdevs-form <?php echo $class; ?>">
-    <strong><?php _e('Booking Settings', 'sdevs_booking'); ?></strong>
+<div id="sdevs_booking_data" class="panel sdevs_panel woocommerce_options_panel sdevs-form <?php echo esc_html($class); ?>">
+    <strong><?php echo esc_html__('Booking Settings', 'sdevs_booking'); ?></strong>
     <?php
     wp_nonce_field("_product_booking_nonce", "_product_booking_nonce", false);
     woocommerce_wp_checkbox([

@@ -19,7 +19,7 @@ class Product
     {
         $class                 = apply_filters('sdevs_booking_product_data_class', 'show_if_simple');
         $tabs['sdevs_booking'] = array(
-            'label'  => __('Booking', 'sdevs_booking'),
+            'label'  => __('Booking', 'wc-booking'),
             'class'  => $class,
             'target' => 'sdevs_booking_data',
         );

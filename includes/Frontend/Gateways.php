@@ -18,8 +18,7 @@ class Gateways
      * @param $available_gateways
      * @return array
      */
-    public function filter_available_gateways($available_gateways)
-    {
+    public function filter_available_gateways($available_gateways): array {
         if (is_admin())
             return $available_gateways;
 
@@ -28,7 +27,7 @@ class Gateways
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
             $book_meta = get_post_meta($cart_item['product_id'], "bookable_product_meta", true);
             if (!empty($book_meta) && $book_meta["enable_booking"]) :
-                $book_meta["bookable_require_conf"] ? $bookable = true : false;
+                $book_meta["bookable_require_conf"] && ( $bookable = true );
             endif;
         }
 

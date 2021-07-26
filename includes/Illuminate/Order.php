@@ -30,19 +30,9 @@ class Order
                 $post_status = "processing";
                 break;
 
-            case "completed";
-                $post_status = "complete";
-                break;
-
+            case "refunded":
+            case "failed":
             case "cancelled";
-                $post_status = "cancelled";
-                break;
-
-            case "refunded";
-                $post_status = "cancelled";
-                break;
-
-            case "failed";
                 $post_status = "cancelled";
                 break;
 

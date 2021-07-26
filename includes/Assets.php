@@ -40,9 +40,9 @@ class Assets
     private function register_scripts($scripts)
     {
         foreach ($scripts as $handle => $script) {
-            $deps      = isset($script['deps']) ? $script['deps'] : false;
-            $in_footer = isset($script['in_footer']) ? $script['in_footer'] : false;
-            $version   = isset($script['version']) ? $script['version'] : SDEVS_BOOKING_VERSION;
+            $deps      = $script['deps'] ?? false;
+            $in_footer = $script['in_footer'] ?? false;
+            $version   = $script['version'] ?? SDEVS_BOOKING_VERSION;
 
             wp_register_script($handle, $script['src'], $deps, $version, $in_footer);
         }
@@ -55,10 +55,10 @@ class Assets
      *
      * @return void
      */
-    public function register_styles($styles)
+    public function register_styles( array $styles)
     {
         foreach ($styles as $handle => $style) {
-            $deps = isset($style['deps']) ? $style['deps'] : false;
+            $deps = $style['deps'] ?? false;
 
             wp_register_style($handle, $style['src'], $deps, SDEVS_BOOKING_VERSION);
         }
@@ -73,9 +73,7 @@ class Assets
     {
         $plugin_js_assets_path = SDEVS_BOOKING_ASSETS . '/js/';
 
-        $scripts = [];
-
-        return $scripts;
+        return [];
     }
 
     /**
@@ -83,16 +81,13 @@ class Assets
      *
      * @return array
      */
-    public function get_styles()
-    {
+    public function get_styles(): array {
         $plugin_css_assets_path = SDEVS_BOOKING_ASSETS . '/css/';
 
-        $styles = [
+        return [
             "sdevs_booking_admin_styles" => [
                 "src" => $plugin_css_assets_path . 'admin.css'
             ]
         ];
-
-        return $styles;
     }
 }

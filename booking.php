@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Booking
+Plugin Name: Booking for wooCommerce
 Plugin URI: https://wordpress.org/plugins/wc-booking
 Description: Show available dates, time in a simple dropdown, take booking for products and services.
 Version: 1.0.0
@@ -8,7 +8,7 @@ Author: SpringDevs
 Author URI: https://springdevs.com/
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: sdevs_booking
+Text Domain: wc-booking
 Domain Path: /languages
 */
 
@@ -231,7 +231,7 @@ final class Sdevs_Booking
      */
     public function localization_setup()
     {
-        load_plugin_textdomain('sdevs_booking', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+        load_plugin_textdomain('wc-booking', false, dirname(plugin_basename(__FILE__)) . '/languages/');
     }
 
     /**
@@ -241,8 +241,7 @@ final class Sdevs_Booking
      *
      * @return bool
      */
-    private function is_request($type)
-    {
+    private function is_request( string $type): bool {
         switch ($type) {
             case 'admin':
                 return is_admin();

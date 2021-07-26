@@ -23,11 +23,11 @@ $postslist = new WP_Query($args);
 <table class="shop_table my_account_bookings">
     <thead>
         <tr>
-            <th scope="col" class="booking-id"><?php esc_html_e('ID', 'sdevs_booking'); ?></th>
-            <th scope="col" class="order-number"><?php esc_html_e('Order', 'sdevs_booking'); ?></th>
-            <th scope="col" class="booked-title"><?php esc_html_e('Booked', 'sdevs_booking'); ?></th>
-            <th scope="col" class="booking-date-time"><?php esc_html_e('Date - Time', 'sdevs_booking'); ?></th>
-            <th scope="col" class="booking-status"><?php esc_html_e('Status', 'sdevs_booking'); ?></th>
+            <th scope="col" class="booking-id"><?php esc_html_e('ID', 'wc-booking'); ?></th>
+            <th scope="col" class="order-number"><?php esc_html_e('Order', 'wc-booking'); ?></th>
+            <th scope="col" class="booked-title"><?php esc_html_e('Booked', 'wc-booking'); ?></th>
+            <th scope="col" class="booking-date-time"><?php esc_html_e('Date - Time', 'wc-booking'); ?></th>
+            <th scope="col" class="booking-status"><?php esc_html_e('Status', 'wc-booking'); ?></th>
             <!--            <th scope="col" class="booking-cancel"></th>-->
         </tr>
     </thead>

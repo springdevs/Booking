@@ -25,25 +25,25 @@ class Post
     public function create_post_type()
     {
         $labels = array(
-            "name" => __("Bookings", "sdevs_booking"),
-            "singular_name" => __("Booking", "sdevs_booking"),
-            'name_admin_bar'        => __('Booking\'s', 'sdevs_booking'),
-            'archives'              => __('Item Archives', 'sdevs_booking'),
-            'attributes'            => __('Item Attributes', 'sdevs_booking'),
-            'parent_item_colon'     => __('Parent :', 'sdevs_booking'),
-            'all_items'             => __('Bookings', 'sdevs_booking'),
-            'add_new_item'          => __('Add New Booking', 'sdevs_booking'),
-            'add_new'               => __('Add Booking', 'sdevs_booking'),
-            'new_item'              => __('New Booking', 'sdevs_booking'),
-            'edit_item'             => __('Edit Booking', 'sdevs_booking'),
-            'update_item'           => __('Update Booking', 'sdevs_booking'),
-            'view_item'             => __('View Booking', 'sdevs_booking'),
-            'view_items'            => __('View Booking', 'sdevs_booking'),
-            'search_items'          => __('Search Booking', 'sdevs_booking'),
+            "name" => __("Bookings", "wc-booking"),
+            "singular_name" => __("Booking", "wc-booking"),
+            'name_admin_bar'        => __('Booking\'s', 'wc-booking'),
+            'archives'              => __('Item Archives', 'wc-booking'),
+            'attributes'            => __('Item Attributes', 'wc-booking'),
+            'parent_item_colon'     => __('Parent :', 'wc-booking'),
+            'all_items'             => __('Bookings', 'wc-booking'),
+            'add_new_item'          => __('Add New Booking', 'wc-booking'),
+            'add_new'               => __('Add Booking', 'wc-booking'),
+            'new_item'              => __('New Booking', 'wc-booking'),
+            'edit_item'             => __('Edit Booking', 'wc-booking'),
+            'update_item'           => __('Update Booking', 'wc-booking'),
+            'view_item'             => __('View Booking', 'wc-booking'),
+            'view_items'            => __('View Booking', 'wc-booking'),
+            'search_items'          => __('Search Booking', 'wc-booking'),
         );
 
         $args = array(
-            "label" => __("Bookings", "sdevs_booking"),
+            "label" => __("Bookings", "wc-booking"),
             "labels" => $labels,
             "description" => "",
             "public" => false,
@@ -93,10 +93,10 @@ class Post
 
     public function add_custom_columns($columns)
     {
-        $columns['booked'] = __('Booked', 'sdevs_booking');
-        $columns['order_id'] = __('Order', 'sdevs_booking');
-        $columns['customer'] = __('Customer', 'sdevs_booking');
-        $columns['booking_status'] = __('Status', 'sdevs_booking');
+        $columns['booked'] = __('Booked', 'wc-booking');
+        $columns['order_id'] = __('Order', 'wc-booking');
+        $columns['customer'] = __('Customer', 'wc-booking');
+        $columns['booking_status'] = __('Status', 'wc-booking');
         $new = [];
         $order_id = $columns['order_id'];
         $booked = $columns['booked'];
@@ -148,7 +148,7 @@ class Post
             <br />
             <a href="mailto:<?php echo esc_html($order->get_billing_email()); ?>"><?php echo esc_html($order->get_billing_email()); ?></a>
             <br />
-            <?php echo esc_html__("Phone :", "sdevs_booking"); ?> <a href="tel:<?php echo esc_html($order->get_billing_phone()); ?>"><?php echo esc_html($order->get_billing_phone()); ?></a>
+            <?php echo esc_html__("Phone :", "wc-booking"); ?> <a href="tel:<?php echo esc_html($order->get_billing_phone()); ?>"><?php echo esc_html($order->get_billing_phone()); ?></a>
         <?php
         } elseif ($column == "order_id") {
         ?>
@@ -156,13 +156,13 @@ class Post
 <?php
         } elseif ($column == "booking_status") {
             $status = [
-                "paid"         => __("Paid", "sdevs_booking"),
-                "processing"   => __("Processing", "sdevs_booking"),
-                "unpaid"       => __("Unpaid", "sdevs_booking"),
-                "pending_conf" => __("Pending Confirmation", "sdevs_booking"),
-                "confirmed"    => __("Request Confirmed", "sdevs_booking"),
-                "complete"     => __("Complete", "sdevs_booking"),
-                "cancelled"    => __("Cancelled", "sdevs_booking"),
+                "paid"         => __("Paid", "wc-booking"),
+                "processing"   => __("Processing", "wc-booking"),
+                "unpaid"       => __("Unpaid", "wc-booking"),
+                "pending_conf" => __("Pending Confirmation", "wc-booking"),
+                "confirmed"    => __("Request Confirmed", "wc-booking"),
+                "complete"     => __("Complete", "wc-booking"),
+                "cancelled"    => __("Cancelled", "wc-booking"),
             ];
             echo esc_html($status[get_post_status($post_id)]);
         }

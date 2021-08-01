@@ -3,7 +3,7 @@
     <select class="booking-time" name="booking-time" id="booking-time">
         <option value=""><?php echo esc_html__("Choose your Time", "wc-booking"); ?></option>';
         <?php foreach ($timeFields as $timeField) : ?>
-            <option value="<?php echo esc_html($timeField); ?>"><?php echo esc_html__($timeField, "wc-booking"); ?></option>'
+            <option value="<?php echo esc_html($timeField); ?>"><?php echo esc_html($timeField); ?></option>'
         <?php endforeach; ?>
     </select>
 </p>

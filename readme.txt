@@ -3,7 +3,7 @@ Contributors: springdevs, naminbd, istiaqnirab
 Donate link:
 Tags: booking, woocommerce-booking
 Requires at least: 1.0.0
-Tested up to: 5.7
+Tested up to: 5.8
 Stable tag: 1.0.0
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -15,16 +15,16 @@ Show available dates, time in a simple dropdown, take booking for products and s
 
 Show available dates, time in a simple dropdown, take booking for products and services.
 
- 
+
 ## Features
- 
+
 - Enable booking on woocommerce products
 - Support booking confirmation feature
 - Clean and minimal order detail view for more convenience
 - Admin booking management area
 - Easy to use !
 
- 
+
 == Installation ==
 
     = Installation from within WordPress =

@@ -266,7 +266,7 @@ final class Sdevs_Booking
  *
  * @return Sdevs_Booking|bool
  */
-function sdevs_booking()
+function wc_sdevs_booking()
 {
     return Sdevs_Booking::init();
 }
@@ -274,4 +274,4 @@ function sdevs_booking()
 /**
  *  kick-off the plugin
  */
-sdevs_booking();
+wc_sdevs_booking();

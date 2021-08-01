@@ -28,7 +28,7 @@ class Product
 
     public function custom_tab_data()
     {
-        if (sdevs_booking_pro_activated()) {
+        if (sdevs_wcbooking_pro_activated()) {
             do_action('sdevs_booking_pro_edit_fields_html');
         } else {
             $screen = get_current_screen();
@@ -65,7 +65,7 @@ class Product
             return;
         }
 
-        if (sdevs_booking_pro_activated()) {
+        if (sdevs_wcbooking_pro_activated()) {
             return;
         }
 

@@ -53,12 +53,12 @@ $postslist = new WP_Query($args);
                         <?php if ($product) : ?>
                             <a href="<?php the_permalink($post_meta["product_id"]); ?>"><?php echo $product->get_title(); ?></a><br />
                             <?php foreach ($attributes as $key => $value) : ?>
-                                <strong><?php echo $key; ?> : </strong> <?php echo $value; ?><br />
+                                <strong><?php echo esc_html($key); ?> : </strong> <?php echo esc_html($value); ?><br />
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo $post_meta["date"] . " - " . $post_meta["time"]; ?></td>
-                    <td><?php echo (get_post_status() == "pending_conf" ? "Pending Confirmation" : get_post_status()); ?></td>
+                    <td><?php echo esc_html($post_meta["date"] . " - " . $post_meta["time"]); ?></td>
+                    <td><?php echo (get_post_status() == "pending_conf" ? esc_html("Pending Confirmation") : get_post_status()); ?></td>
                 </tr>
         <?php
             endwhile;

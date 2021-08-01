@@ -1,4 +1,4 @@
-=== Woocommerce Booking ===
+=== Booking for wooCommerce ===
 Contributors: springdevs, naminbd, istiaqnirab
 Donate link:
 Tags: booking, woocommerce-booking

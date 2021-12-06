@@ -152,6 +152,12 @@ final class Sdevs_Booking
      */
     public function init_plugin()
     {
+        if (!class_exists('WooCommerce')) {
+            add_action('admin_notices', function () {
+                include 'includes/Admin/views/plugin-notice.php';
+            });
+            return;
+        }
         $this->includes();
         $this->init_hooks();
     }
@@ -241,7 +247,8 @@ final class Sdevs_Booking
      *
      * @return bool
      */
-    private function is_request( string $type): bool {
+    private function is_request(string $type): bool
+    {
         switch ($type) {
             case 'admin':
                 return is_admin();

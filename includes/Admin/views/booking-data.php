@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <th><?php _e('Address', 'wc-booking'); ?>:</th>
-            <td><?php echo esc_html($order->get_formatted_billing_address()); ?></td>
+            <td><?php echo esc_sql($order->get_formatted_billing_address()); ?></td>
         </tr>
         <tr>
             <th><?php _e('Phone', 'wc-booking'); ?>:</th>

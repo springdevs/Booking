@@ -49,9 +49,16 @@ Show available dates, time in a simple dropdown, take booking for products and s
 5. MyAccount booking lists
 6. All booking lists
 7. Booking management
+8. Booking confirmed email
+9. Customize booking confirmed email
 
 
 == Changelog ==
+
+    = 1.0.1 =
+        * [New] Send a confirmed email when booking is confirmed.
+        * [Fix] Booking Customer details address is broken !!
+        * [Fix] Plugin activated without woocommerce active !!
 
     = 1.0.0 =
         * Initial release

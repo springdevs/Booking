@@ -155,6 +155,8 @@ class Bookings
             $order->update_status('reconf');
         } elseif ($status === "confirmed") {
             $order->update_status('pending');
+            WC()->mailer();
+            do_action('sdevs_booking_confirmed', $order->get_id());
         } elseif ($status === "complete") {
             $order->update_status('completed');
         } elseif ($status === "cancelled") {

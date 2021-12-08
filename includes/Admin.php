@@ -29,6 +29,7 @@ class Admin
         new Gateways();
         new Post();
         new Status();
+        new Illuminate();
         new Bookings();
         new Order();
     }

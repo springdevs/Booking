@@ -19,7 +19,7 @@ class Product
     {
         $class                 = apply_filters('sdevs_booking_product_data_class', 'show_if_simple');
         $tabs['sdevs_booking'] = array(
-            'label'  => __('Booking', 'sdevs_booking'),
+            'label'  => __('Booking', 'wc-booking'),
             'class'  => $class,
             'target' => 'sdevs_booking_data',
         );
@@ -28,7 +28,7 @@ class Product
 
     public function custom_tab_data()
     {
-        if (sdevs_booking_pro_activated()) {
+        if (sdevs_wcbooking_pro_activated()) {
             do_action('sdevs_booking_pro_edit_fields_html');
         } else {
             $screen = get_current_screen();
@@ -65,7 +65,7 @@ class Product
             return;
         }
 
-        if (sdevs_booking_pro_activated()) {
+        if (sdevs_wcbooking_pro_activated()) {
             return;
         }
 

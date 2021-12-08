@@ -23,11 +23,11 @@ $postslist = new WP_Query($args);
 <table class="shop_table my_account_bookings">
     <thead>
         <tr>
-            <th scope="col" class="booking-id"><?php esc_html_e('ID', 'sdevs_booking'); ?></th>
-            <th scope="col" class="order-number"><?php esc_html_e('Order', 'sdevs_booking'); ?></th>
-            <th scope="col" class="booked-title"><?php esc_html_e('Booked', 'sdevs_booking'); ?></th>
-            <th scope="col" class="booking-date-time"><?php esc_html_e('Date - Time', 'sdevs_booking'); ?></th>
-            <th scope="col" class="booking-status"><?php esc_html_e('Status', 'sdevs_booking'); ?></th>
+            <th scope="col" class="booking-id"><?php esc_html_e('ID', 'wc-booking'); ?></th>
+            <th scope="col" class="order-number"><?php esc_html_e('Order', 'wc-booking'); ?></th>
+            <th scope="col" class="booked-title"><?php esc_html_e('Booked', 'wc-booking'); ?></th>
+            <th scope="col" class="booking-date-time"><?php esc_html_e('Date - Time', 'wc-booking'); ?></th>
+            <th scope="col" class="booking-status"><?php esc_html_e('Status', 'wc-booking'); ?></th>
             <!--            <th scope="col" class="booking-cancel"></th>-->
         </tr>
     </thead>
@@ -53,12 +53,12 @@ $postslist = new WP_Query($args);
                         <?php if ($product) : ?>
                             <a href="<?php the_permalink($post_meta["product_id"]); ?>"><?php echo $product->get_title(); ?></a><br />
                             <?php foreach ($attributes as $key => $value) : ?>
-                                <strong><?php echo $key; ?> : </strong> <?php echo $value; ?><br />
+                                <strong><?php echo esc_html($key); ?> : </strong> <?php echo esc_html($value); ?><br />
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo $post_meta["date"] . " - " . $post_meta["time"]; ?></td>
-                    <td><?php echo (get_post_status() == "pending_conf" ? "Pending Confirmation" : get_post_status()); ?></td>
+                    <td><?php echo esc_html($post_meta["date"] . " - " . $post_meta["time"]); ?></td>
+                    <td><?php echo (get_post_status() == "pending_conf" ? esc_html("Pending Confirmation") : get_post_status()); ?></td>
                 </tr>
         <?php
             endwhile;

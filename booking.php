@@ -1,14 +1,14 @@
 <?php
 /*
-Plugin Name: Booking
+Plugin Name: Booking for wooCommerce
 Plugin URI: https://wordpress.org/plugins/wc-booking
 Description: Show available dates, time in a simple dropdown, take booking for products and services.
-Version: 1.0.0
+Version: 1.0.1
 Author: SpringDevs
 Author URI: https://springdevs.com/
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: sdevs_booking
+Text Domain: wc-booking
 Domain Path: /languages
 */
 
@@ -57,7 +57,7 @@ final class Sdevs_Booking
      *
      * @var string
      */
-    const version = '1.0.0';
+    const version = '1.0.1';
 
     /**
      * Holds various class instances
@@ -152,6 +152,12 @@ final class Sdevs_Booking
      */
     public function init_plugin()
     {
+        if (!class_exists('WooCommerce')) {
+            add_action('admin_notices', function () {
+                include 'includes/Admin/views/plugin-notice.php';
+            });
+            return;
+        }
         $this->includes();
         $this->init_hooks();
     }
@@ -231,7 +237,7 @@ final class Sdevs_Booking
      */
     public function localization_setup()
     {
-        load_plugin_textdomain('sdevs_booking', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+        load_plugin_textdomain('wc-booking', false, dirname(plugin_basename(__FILE__)) . '/languages/');
     }
 
     /**
@@ -241,7 +247,7 @@ final class Sdevs_Booking
      *
      * @return bool
      */
-    private function is_request($type)
+    private function is_request(string $type): bool
     {
         switch ($type) {
             case 'admin':
@@ -267,7 +273,7 @@ final class Sdevs_Booking
  *
  * @return Sdevs_Booking|bool
  */
-function sdevs_booking()
+function wc_sdevs_booking()
 {
     return Sdevs_Booking::init();
 }
@@ -275,4 +281,4 @@ function sdevs_booking()
 /**
  *  kick-off the plugin
  */
-sdevs_booking();
+wc_sdevs_booking();

@@ -36,7 +36,7 @@ class Products
         if ($product->is_type('variable')) return;
         $status = $this->check_product_in_request($product->get_id());
         if ($status) {
-            _e('<strong>You already request this product !!</strong>', 'sdevs_booking');
+            _e('<strong>You already request this product !!</strong>', 'wc-booking');
         }
     }
 
@@ -73,7 +73,7 @@ class Products
     {
         $book_meta = get_post_meta($product->get_ID(), "bookable_product_meta", true);
         if (!empty($book_meta) && $book_meta["enable_booking"]) {
-            $button_text = __("Read more", "sdevs_booking");
+            $button_text = __("Read more", "wc-booking");
             $button = '<a class="button" href="' . $product->get_permalink() . '">' . $button_text . '</a>';
             return $button;
         } else {
@@ -98,7 +98,7 @@ class Products
         // Only on bookable products
         if (!(!empty($post_meta) && $post_meta["enable_booking"])) return;
 
-        if (sdevs_booking_pro_activated()) {
+        if (sdevs_wcbooking_pro_activated()) {
             do_action('sdevs_booking_pro_single_date_time_html', $product, $post_meta);
         } else {
             $dateFields = [];
@@ -108,17 +108,7 @@ class Products
                 array_push($dateFields, date('M d, Y', $date));
             }
 
-            $required = '&nbsp;<abbr class="required" title="required">*</abbr></label>';
-
-            echo '<p class="form-row form-row-wide" id="booking-date-field">
-    <label for="booking-date">' . __('Select Date') . $required . '</label>
-    <select class="booking-date" name="booking-date" id="booking-date">
-        <option value="">' . __("Choose your Date") . '</option>';
-            foreach ($dateFields as $dateField) {
-                echo '<option value="' . $dateField . '">' . __($dateField, "sdevs_booking") . '</option>';
-            }
-            echo '</select>
-    </p><br>';
+            include 'views/date-html.php';
 
             $timeFields = [];
 
@@ -132,15 +122,7 @@ class Products
                 $timeFields[] = $curr_time;
             }
 
-            echo '<p class="form-row form-row-wide" id="booking-time-field">
-    <label for="booking-time">' . __('Select Time') . $required . '</label>
-    <select class="booking-time" name="booking-time" id="booking-time">
-        <option value="">' . __("Choose your Time") . '</option>';
-            foreach ($timeFields as $timeField) {
-                echo '<option value="' . $timeField . '">' . __($timeField, "sdevs_booking") . '</option>';
-            }
-            echo '</select>
-    </p><br>';
+            include 'views/time-html.php';
         }
     }
 
@@ -152,10 +134,10 @@ class Products
             return $passed;
 
         if (isset($_POST['booking-date']) && empty($_POST['booking-date'])) {
-            wc_add_notice(__("Please choose your Date.", "sdevs_booking"), 'error');
+            wc_add_notice(__("Please choose your Date.", "wc-booking"), 'error');
             $passed = false;
         } elseif (isset($_POST['booking-time']) && empty($_POST["booking-time"])) {
-            wc_add_notice(__("Please choose your Time.", "sdevs_booking"), 'error');
+            wc_add_notice(__("Please choose your Time.", "wc-booking"), 'error');
             $passed = false;
         }
         return $passed;
@@ -170,7 +152,7 @@ class Products
             $post_meta = get_post_meta($_product->get_id(), "bookable_product_meta", true);
             if (!empty($post_meta) && $post_meta["enable_booking"] && $post_meta["bookable_require_conf"]) :
                 $cartProductStatus = false;
-                $error_notice = __("Currently You have Confirmation product in a cart !!", "sdevs_booking");
+                $error_notice = __("Currently You have Confirmation product in a cart !!", "wc-booking");
                 if (!empty($current_product_meta) && $current_product_meta["enable_booking"]) :
                     if ($current_product_meta["bookable_require_conf"]) :
                         $cartProductStatus = true;
@@ -178,7 +160,7 @@ class Products
                 endif;
             else :
                 if (!empty($current_product_meta) && $current_product_meta["enable_booking"] && $current_product_meta["bookable_require_conf"]) :
-                    $error_notice = __("Currently You have Non-Confirmation product in a cart !!", "sdevs_booking");
+                    $error_notice = __("Currently You have Non-Confirmation product in a cart !!", "wc-booking");
                     $cartProductStatus = false;
                 endif;
             endif;
@@ -195,9 +177,9 @@ class Products
         $book_meta = get_post_meta(get_the_ID(), "bookable_product_meta", true);
         if (!empty($book_meta) && $book_meta["enable_booking"]) {
             if ($book_meta["bookable_require_conf"]) {
-                return __('Check Availability', 'sdevs_booking');
+                return __('Check Availability', 'wc-booking');
             } else {
-                return __('Book Now', 'sdevs_booking');
+                return __('Book Now', 'wc-booking');
             }
         } else {
             return $text;
@@ -207,10 +189,10 @@ class Products
     public function add_to_cart_item_data($cart_item_data, $product_id, $variation_id)
     {
         if (isset($_POST['booking-date'])) {
-            $cart_item_data['booking-date'] = esc_attr($_POST['booking-date']);
+            $cart_item_data['booking-date'] = sanitize_text_field($_POST['booking-date']);
         }
         if (isset($_POST['booking-time'])) {
-            $cart_item_data['booking-time'] = esc_attr($_POST['booking-time']);
+            $cart_item_data['booking-time'] = sanitize_text_field($_POST['booking-time']);
         }
         return $cart_item_data;
     }
@@ -219,13 +201,13 @@ class Products
     {
         if (isset($cart_item['booking-date'])) {
             $cart_item_data[] = array(
-                'name' => __('Date', 'sdevs_booking'),
+                'name' => __('Date', 'wc-booking'),
                 'value' => $cart_item['booking-date'],
             );
         }
         if (isset($cart_item['booking-time'])) {
             $cart_item_data[] = array(
-                'name' => __('Time', 'sdevs_booking'),
+                'name' => __('Time', 'wc-booking'),
                 'value' => $cart_item['booking-time'],
             );
         }

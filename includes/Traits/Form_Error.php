@@ -13,24 +13,23 @@ trait Form_Error
      *
      * @var array
      */
-    public $errors = [];
+    public array $errors = [];
 
     /**
      * Check if the form has error
      *
-     * @param  string  $key
+     * @param string $key
      *
      * @return boolean
      */
-    public function has_error($key)
-    {
-        return isset($this->errors[$key]) ? true : false;
+    public function has_error( string $key): bool {
+        return isset($this->errors[$key]);
     }
 
     /**
      * Get the error by key
      *
-     * @param  key $key
+     * @param $key
      *
      * @return string | false
      */

@@ -28,5 +28,6 @@ class Frontend
         new MyAccount();
         new Status();
         new Order();
+        new Illuminate();
     }
 }

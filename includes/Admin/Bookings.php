@@ -89,13 +89,13 @@ class Bookings
     {
         global $post;
         $statuses = [
-            "paid"         => __("Paid", "sdevs_booking"),
-            "processing"   => __("Processing", "sdevs_booking"),
-            "unpaid"       => __("Unpaid", "sdevs_booking"),
-            "pending_conf" => __("Pending Confirmation", "sdevs_booking"),
-            "confirmed"    => __("Request Confirmed", "sdevs_booking"),
-            "complete"     => __("Complete", "sdevs_booking"),
-            "cancelled"    => __("Cancelled", "sdevs_booking"),
+            "paid"         => __("Paid", "wc-booking"),
+            "processing"   => __("Processing", "wc-booking"),
+            "unpaid"       => __("Unpaid", "wc-booking"),
+            "pending_conf" => __("Pending Confirmation", "wc-booking"),
+            "confirmed"    => __("Request Confirmed", "wc-booking"),
+            "complete"     => __("Complete", "wc-booking"),
+            "cancelled"    => __("Cancelled", "wc-booking"),
         ];
         $post_meta  = get_post_meta($post->ID, "_booking_order_meta", true);
         $product    = wc_get_product($post_meta["product_id"]);
@@ -155,6 +155,8 @@ class Bookings
             $order->update_status('reconf');
         } elseif ($status === "confirmed") {
             $order->update_status('pending');
+            WC()->mailer();
+            do_action('sdevs_booking_confirmed', $order->get_id());
         } elseif ($status === "complete") {
             $order->update_status('completed');
         } elseif ($status === "cancelled") {

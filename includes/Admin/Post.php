@@ -40,6 +40,8 @@ class Post
             'view_item'             => __('View Booking', 'wc-booking'),
             'view_items'            => __('View Booking', 'wc-booking'),
             'search_items'          => __('Search Booking', 'wc-booking'),
+            'not_found' =>  __('No Bookings Found', 'wc-booking'),
+            'not_found_in_trash' => __('No Bookings found in Trash', 'wc-booking'),
         );
 
         $args = array(

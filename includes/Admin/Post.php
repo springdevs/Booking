@@ -17,6 +17,7 @@ class Post
         add_filter('post_row_actions', [$this, 'post_row_actions'], 10, 2);
         add_filter('manage_bookable_order_posts_columns', [$this, 'add_custom_columns']);
         add_action('manage_bookable_order_posts_custom_column', [$this, 'add_custom_columns_data'], 10, 2);
+        add_filter('wp_untrash_post_status', [$this, 'filter_untrash_status'], 10, 3);
     }
 
     /**
@@ -40,6 +41,8 @@ class Post
             'view_item'             => __('View Booking', 'wc-booking'),
             'view_items'            => __('View Booking', 'wc-booking'),
             'search_items'          => __('Search Booking', 'wc-booking'),
+            'not_found' =>  __('No Bookings Found', 'wc-booking'),
+            'not_found_in_trash' => __('No Bookings found in Trash', 'wc-booking'),
         );
 
         $args = array(
@@ -163,8 +166,15 @@ class Post
                 "confirmed"    => __("Request Confirmed", "wc-booking"),
                 "complete"     => __("Complete", "wc-booking"),
                 "cancelled"    => __("Cancelled", "wc-booking"),
+                "trash"        => __("Trash", "wc-booking"),
             ];
             echo esc_html($status[get_post_status($post_id)]);
         }
+    }
+
+    public function filter_untrash_status($new_status, $post_id, $previous_status)
+    {
+        $post_type = get_post_type($post_id);
+        return $post_type == 'bookable_order' ? $previous_status : $new_status;
     }
 }

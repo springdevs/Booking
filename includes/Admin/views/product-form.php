@@ -34,6 +34,7 @@
         "label" => __('Display Start Time', 'wc-booking'),
         "type"  => "time",
         "value" => $display_start_time,
+        "description" => __("<br/>Display Start Time must be set to <b>AM</b>", "wc-booking"),
     ]);
 
     woocommerce_wp_text_input([
@@ -41,6 +42,7 @@
         "label" => __('Display End Time', 'wc-booking'),
         "type"  => "time",
         "value" => $display_end_time,
+        "description" => __("<br/>Display End Time must be set to <b>PM</b>", "wc-booking"),
     ]);
 
     ?>

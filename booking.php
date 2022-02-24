@@ -3,7 +3,7 @@
 Plugin Name: Booking for wooCommerce
 Plugin URI: https://wordpress.org/plugins/wc-booking
 Description: Show available dates, time in a simple dropdown, take booking for products and services.
-Version: 1.0.1
+Version: 1.0.2
 Author: SpringDevs
 Author URI: https://springdevs.com/
 License: GPLv2
@@ -57,7 +57,7 @@ final class Sdevs_Booking
      *
      * @var string
      */
-    const version = '1.0.1';
+    const version = '1.0.2';
 
     /**
      * Holds various class instances
